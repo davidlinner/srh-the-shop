@@ -2,11 +2,13 @@
 <ul class="article-list">
     {{#each articles}}
         <li id="{{article_pk}}" class="article">
-            <h3 class="article-title">{{caption}}</h3>
-            <p class="article-teaser">{{teaser}}</p>
-            <p class="article-price">
-                {{price}} EUR
-            </p>
+            <a href="/article/{{article_pk}}">
+                <h3 class="article-title">{{caption}}</h3>
+                <p class="article-teaser">{{teaser}}</p>
+                <p class="article-price">
+                    {{price}} EUR
+                </p>
+            </a>
         </li>
     {{/each}}
 </ul>
