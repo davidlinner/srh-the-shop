@@ -23,3 +23,29 @@ body {
   font-weight: bold;
   font-size: 1.25rem;
 }
+
+.rating-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.rating {
+  padding: 1rem;
+  background: #dddddd;
+  border-radius: 10px;
+  margin: .5rem;
+}
+
+.form-row {
+  width: 50%;
+  margin: 1rem 0;
+}
+
+.form-row label {
+  display: block;
+}
+
+.form-row textarea, .form-row input {
+  width: 100%;
+}
+
