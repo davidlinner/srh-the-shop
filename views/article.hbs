@@ -13,6 +13,9 @@
             <em>Stars: {{rate}}</em>
             <h3>{{author}} ({{date_rated}})</h3>
             <p>{{message}}</p>
+            <form method="post" action="/article/{{article_fk}}/ratings/{{rating_pk}}">
+                <input type="submit" value="Löschen">
+            </form>
         </li>
     {{/each}}
 </ul>
@@ -25,7 +28,7 @@
     </div>
     <div class="form-row">
         <label for="rate">Bewertung</label>
-        <input type="range" min="0" max="5" value="5" name="rate">
+        <input type="range" min="1" max="5" value="5" name="rate">
     </div>
     <div class="form-row">
         <label for="message">Beschreibung</label>

@@ -47,5 +47,9 @@ body {
 
 .form-row textarea, .form-row input {
   width: 100%;
+  font-family: sans-serif;
 }
 
+.form-row input[type=submit]{
+  background-color: green;
+}

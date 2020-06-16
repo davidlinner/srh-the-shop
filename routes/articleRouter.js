@@ -9,7 +9,7 @@ router.get('/:id', function (httpRequest, httpResponse, next) {
     const model = {};
 
     db
-        .query(`select article_pk, teaser, description, price, caption from articles where article_pk = ${id}`)
+        .query(`select * from articles where article_pk = ${id}`)
         .then(result => {
             if (result.rows.length < 1) {
                 next();
@@ -26,18 +26,32 @@ router.get('/:id', function (httpRequest, httpResponse, next) {
 
 });
 
+const INSERT_RATING = 'insert into ratings(date_rated, appreciates, author, message, rate, article_fk) VALUES (now(), 0, $1,$2,$3,$4)';
+
 router.post('/:id/ratings', function (httpRequest, httpResponse, next) {
     const articleId = httpRequest.params.id;
     const rating = httpRequest.body;
 
     db
-        .query('insert into ratings(date_rated, appreciates, author, message, rate, article_fk) VALUES (now(), 0, $1,$2,$3,$4)',
-            [rating.author, rating.message, rating.rate, articleId])
+        .query(INSERT_RATING, [rating.author, rating.message, rating.rate, articleId])
         .then(result => {
             httpResponse.redirect(`/article/${articleId}`);
         })
         .catch(err => next(err));
 });
+
+router.post('/:articleId/ratings/:ratingId', function (httpRequest, httpResponse, next) {
+    const ratingId = httpRequest.params.ratingId;
+    const articleId = httpRequest.params.articleId;
+
+    db
+        .query('delete from ratings where rating_pk = $1', [ratingId])
+        .then(result => {
+            httpResponse.redirect(`/article/${articleId}`);
+        })
+        .catch(err => next(err));
+});
+
 
 
 module.exports = router;
